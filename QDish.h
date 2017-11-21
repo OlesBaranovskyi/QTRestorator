@@ -10,6 +10,7 @@
 #include<QMessageBox>
 #include<QList>
 #include<QInputDialog>
+#include <algorithm>
 struct sort_name_qdish
 {
     bool operator()(const QPair<Product,double> &x,const QPair<Product,double>& y)const
@@ -61,6 +62,8 @@ return ind.operator [](i);
         return dbg.space();
     }
 /////////////////sort
+///
+///
   void sort_by_name()
   {
     std::sort(ind.begin(),ind.end(),sort_name_qdish());
@@ -70,7 +73,6 @@ return ind.operator [](i);
   {
     std::sort(ind.begin(),ind.end(),sort_price_qdish());
   }
-
   void sort_by_amount()
   {
     std::sort(ind.begin(),ind.end(),sort_amount_qdish());
@@ -89,7 +91,9 @@ return ind.operator [](i);
     QDish operator =(QDish);
     QStringList to_string_list();
     bool add_ingridient(Product,double);
+
     bool delete_ingridient(int);
+    bool operator -(QDish _Dish);
    virtual bool save_in_file();
     virtual bool load_from_file(QString);
     void clear(){ind.clear();}

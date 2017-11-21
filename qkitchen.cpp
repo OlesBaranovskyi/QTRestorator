@@ -6,7 +6,7 @@ QKitchen::QKitchen(Q_Restorator_main_window *parentwidg)
 {
     avaible_product_lay=new QHBoxLayout;
     lay_button_add_del=new QVBoxLayout;
-  lay_name_dish=new QHBoxLayout;
+    lay_name_dish=new QHBoxLayout;
     lay_all_layots=new QVBoxLayout;
     list_widget_avaible_product=new QListWidget(this);
     list_widget_avaible_dishes=new QListWidget(this);
@@ -18,23 +18,23 @@ QKitchen::QKitchen(Q_Restorator_main_window *parentwidg)
   // button_edit_dish= new QPushButton("&Изменить блюдо");
 
     list_widget_new_dish=new QListWidget(this);
-  lay_price_weight= new QHBoxLayout;
-  lay_nwdish_labels= new QVBoxLayout;
-  line_edit_price_dish=new QLCDNumber;
-  line_edit_price_dish->display(temp_dish.get_price());
-combobox_types=new QComboBox;
- QStringList lsttypes{"Первое","Второе","Десерт","Напиток","Дргое"};
-combobox_types->addItems(lsttypes);
-  line_edit_name_dish=new QLineEdit;
-  line_edit_name_dish->setFixedWidth(100);
-  lcd_numb_weight_dish=new QLCDNumber;
-  lcd_numb_weight_dish->setSegmentStyle(QLCDNumber::Flat);
-  line_edit_price_dish->setSegmentStyle(QLCDNumber::Flat);
-  lcd_numb_weight_dish->display(temp_dish.get_weight());
-  lay_main_buttons=new QVBoxLayout;
+    lay_price_weight= new QHBoxLayout;
+    lay_nwdish_labels= new QVBoxLayout;
+    line_edit_price_dish=new QLCDNumber;
+    line_edit_price_dish->display(temp_dish.get_price());
+    combobox_types=new QComboBox;
+    QStringList lsttypes{"Первое","Второе","Десерт","Напиток","Дргое"};
+    combobox_types->addItems(lsttypes);
+    line_edit_name_dish=new QLineEdit;
+    line_edit_name_dish->setFixedWidth(100);
+    lcd_numb_weight_dish=new QLCDNumber;
+    lcd_numb_weight_dish->setSegmentStyle(QLCDNumber::Flat);
+    line_edit_price_dish->setSegmentStyle(QLCDNumber::Flat);
+    lcd_numb_weight_dish->display(temp_dish.get_weight());
+    lay_main_buttons=new QVBoxLayout;
 
-lay_name_dish->addWidget(line_edit_name_dish);
-lay_name_dish->addWidget(new QLabel("Название блюда"));
+    lay_name_dish->addWidget(line_edit_name_dish);
+    lay_name_dish->addWidget(new QLabel("Название блюда"));
 
 
 

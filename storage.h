@@ -3,7 +3,7 @@
 #include"QDish.h"
 
 class Storage:public QDish
-{ //using QDish::QDish;
+{ using QDish::QDish;
 public:
 
    bool save_in_file() override{
@@ -55,8 +55,10 @@ public:
       return true;
 
    }
-  // Storage(): QDish(){}
-   //Storage(QString i):QDish(i){}
+
+
+
+
 };
 
 #endif // STORAGE_H

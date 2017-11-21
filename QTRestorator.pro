@@ -31,7 +31,9 @@ SOURCES += main.cpp\
     QDish.cpp \
     qkitchen.cpp \
     qdish.cpp \
-    storage.cpp
+    storage.cpp \
+    qtrestorator-tests.cpp \
+    order_place.cpp
 
 HEADERS  += widget.h \
     product.h \
@@ -40,6 +42,7 @@ HEADERS  += widget.h \
     QDish.h \
     qkitchen.h \
     qdish.h \
-    storage.h
+    storage.h \
+    order_place.h
 
 FORMS    += widget.ui

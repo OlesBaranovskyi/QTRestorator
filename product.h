@@ -23,6 +23,8 @@ Product(const Product& );
 void set_type_product(QString);
 void set_price_product(double);
 void set_name_product(QString);
+bool operator ==(const Product r){return this->get_prdct_name()==r.get_prdct_name() && this->get_prdct_price()==
+            r.get_prdct_price() && this->get_type_product()==r.get_type_product();}
 
 friend QTextStream& operator <<(QTextStream& os,const Product& _product)
     {

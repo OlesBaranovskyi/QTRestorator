@@ -111,13 +111,37 @@ bool QDish::add_ingridient(Product _prd, double _amount)
 
 }
 
+
+
+
 bool QDish::delete_ingridient(int i)
 {
     if(i<0 || i>ind.size())return false;
     ind.remove(i);
-   return true;
+    return true;
 }
 
+bool QDish::operator -(QDish _Dish){
+    bool fnd=false;
+    auto tempind = this->ind;                               //Создал временный вектор ингридиентов для
+    for (int i=0;i<this->size();++i){                        //обеспечеия строгой гарантии не изменности основного
+        for(int j=0;j<_Dish.ind.size();++j){                   //вектора прине достаточном количестве продукта на складе
+            if( tempind[i].first==_Dish.ind[j].first){
+                if(tempind[i].second>=_Dish.ind[j].second){
+                    tempind[i].second-=_Dish.ind[j].second;
+                    fnd=true;
+                }
+                else {
+                    qDebug()<<"Amount not enought"<<endl;
+                    return false;}
+              }
+
+        }
+
+    }
+    this->ind=tempind;
+    return fnd;
+}
 bool QDish::save_in_file()
 {
 
