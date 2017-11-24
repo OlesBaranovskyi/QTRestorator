@@ -1,9 +1,11 @@
 #include "qkitchen.h"
-
+#include"menu.h"
 
 
 QKitchen::QKitchen(Q_Restorator_main_window *parentwidg)
 {
+    std::shared_ptr<Menu> tmp(new Menu);
+    dishes= tmp;
     avaible_product_lay=new QHBoxLayout;
     lay_button_add_del=new QVBoxLayout;
     lay_name_dish=new QHBoxLayout;
@@ -15,7 +17,7 @@ QKitchen::QKitchen(Q_Restorator_main_window *parentwidg)
     button_create_new_dish = new QPushButton("&Создать блюдо");
     button_save_all= new QPushButton("&Сохранить изменения");
     button_delete_dish= new QPushButton("&Удалить блюдо");
-  // button_edit_dish= new QPushButton("&Изменить блюдо");
+
 
     list_widget_new_dish=new QListWidget(this);
     lay_price_weight= new QHBoxLayout;
@@ -53,7 +55,7 @@ QKitchen::QKitchen(Q_Restorator_main_window *parentwidg)
     lay_main_buttons->addWidget(button_create_new_dish);
     lay_main_buttons->addWidget(button_save_all);
     lay_main_buttons->addWidget(button_delete_dish);
-    //lay_main_buttons->addWidget(button_edit_dish);
+
     avaible_product_lay->addWidget(list_widget_avaible_product);
     avaible_product_lay->addLayout(lay_button_add_del);
 
@@ -124,7 +126,7 @@ void QKitchen::save_dishes_titles()
 
     }
 
-    for(auto it=dishes.begin();it!=dishes.end();++it){
+    for(auto it=dishes->begin();it!=dishes->end();++it){
 
         ostream_dishes<<it->get_name()<<'\n';
     }
@@ -166,7 +168,7 @@ bool QKitchen::add_new_dish()
     temp_dish.set_name(line_edit_name_dish->text());
     temp_dish.set_type(combobox_types->currentIndex());
 
-    this->dishes.push_back(temp_dish);
+    this->dishes->push_back(temp_dish);
 
     this->dishes_title.push_back(temp_dish.get_name());
     QMessageBox::information(0,"OK)","Блюдо добавлено");
@@ -181,8 +183,8 @@ bool QKitchen::add_new_dish()
 bool QKitchen::save_chages()
 {
  save_dishes_titles();
- for(int i=0;i<dishes.size();++i){
-     dishes[i].save_in_file();
+ for(int i=0;i<dishes->size();++i){
+     dishes->operator [](i).save_in_file();
  }
 return true;
 }
@@ -205,6 +207,7 @@ bool QKitchen::add_product_in_new_dish()
     list_widget_new_dish->addItems(temp_dish.to_string_list());
     line_edit_price_dish->display(temp_dish.get_price());
     lcd_numb_weight_dish->display(temp_dish.get_weight());
+
     return true;
 }
 
@@ -214,6 +217,11 @@ bool QKitchen::delete_product_from_dish()
 
         temp_dish.delete_ingridient(list_widget_new_dish->currentRow());
         list_widget_new_dish->clear();
+        temp_dish.set_price();
+        temp_dish.set_weght();
+        line_edit_price_dish->display(temp_dish.get_price());
+        lcd_numb_weight_dish->display(temp_dish.get_weight());
+
         list_widget_new_dish->addItems(temp_dish.to_string_list());
         return true;
     }
@@ -237,7 +245,7 @@ void QKitchen::load_dishes()
     QDish new_dish;
     for(int i =0;i<dishes_title.size();++i){
      new_dish.load_from_file(dishes_title[i]);
-     dishes.push_back(new_dish);
+     dishes->push_back(new_dish);
     }
 }
 
@@ -245,7 +253,7 @@ void QKitchen::delete_dish()
 {
     if(list_widget_avaible_dishes->currentRow()>=0){
    QFile::remove(dishes_title[list_widget_avaible_dishes->currentRow()]);
-        dishes.remove(list_widget_avaible_dishes->currentRow());
+        dishes->remove(list_widget_avaible_dishes->currentRow());
     dishes_title.remove(list_widget_avaible_dishes->currentRow());
     create_list_avaible_dishes();
     }
@@ -256,17 +264,17 @@ void QKitchen::delete_dish()
 void QKitchen::edit_dish()
 {
     if(list_widget_avaible_dishes->currentRow()>=0){
-    temp_dish=dishes[list_widget_avaible_dishes->currentRow()];
+    temp_dish=dishes->operator [](list_widget_avaible_dishes->currentRow());
 
     list_widget_new_dish->clear();
-    list_widget_new_dish->addItems(dishes[list_widget_avaible_dishes->currentRow()].to_string_list());
+    list_widget_new_dish->addItems(dishes->operator [](list_widget_avaible_dishes->currentRow()).to_string_list());
 
-    line_edit_name_dish->setText(dishes[list_widget_avaible_dishes->currentRow()].get_name());
-    line_edit_price_dish->display(dishes[list_widget_avaible_dishes->currentRow()].get_weight());
+    line_edit_name_dish->setText(dishes->operator [](list_widget_avaible_dishes->currentRow()).get_name());
+    line_edit_price_dish->display(dishes->operator[](list_widget_avaible_dishes->currentRow()).get_weight());
 
-    lcd_numb_weight_dish->display(dishes[list_widget_avaible_dishes->currentRow()].get_weight());
+    lcd_numb_weight_dish->display(dishes->operator [](list_widget_avaible_dishes->currentRow()).get_weight());
 
-    dishes.remove(list_widget_avaible_dishes->currentRow());
+    dishes->remove(list_widget_avaible_dishes->currentRow());
     dishes_title.remove(list_widget_avaible_dishes->currentRow());
 
 
@@ -277,6 +285,8 @@ void QKitchen::edit_dish()
 }
 
 }
+
+
 
 void QKitchen::slot_add_product_in_new_dish()
 {

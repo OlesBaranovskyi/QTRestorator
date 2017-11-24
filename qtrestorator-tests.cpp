@@ -7,6 +7,8 @@
 #include <QDebug>
 #include "QDish.h"
 #include <iostream>
+#include "menu.h"
+#include <order_place.h>
 namespace test_rest {
 void test_operator_for_QDish(){
 
@@ -37,10 +39,68 @@ void test_operator_for_QDish(){
    qDebug()<<strge;
    qDebug()<<"..............................................";
 }
+std::shared_ptr<Menu> ret_shared(){
+
+
+    std::shared_ptr<Menu> mn(new Menu);
+
+    Product salt("Salt","",1.5);
+    Product pepper ("pepper","",2.5);
+    Product milk ("Milk","",1.5);
+    Product popcorn("Popcorn","",2.5);
+ /*.....................................................*/
+    QDish dish("dish");
+    dish.add_ingridient(salt,2);
+    dish.add_ingridient(pepper,1.5);
+    dish.add_ingridient(milk,0.5);
+    dish.add_ingridient(popcorn,2);
+    mn->push_back(dish);
 
 
 
+    return mn;
+}
+void test_Menu_QDishes(){
 
+
+
+    Product salt("Salt","",1.5);
+    Product pepper ("pepper","",2.5);
+    Product milk ("Milk","",1.5);
+    Product popcorn("Popcorn","",2.5);
+ /*.....................................................*/
+    QDish dish("dish");
+    dish.add_ingridient(salt,2);
+    dish.add_ingridient(pepper,1.5);
+    dish.add_ingridient(milk,0.5);
+    dish.add_ingridient(popcorn,2);
+
+
+    QDish dish2("popcorn");
+
+    dish.add_ingridient(popcorn,2);
+    /*.......................................................*/
+
+std::shared_ptr<Menu> menu(new Menu);
+    //Menu* menu = new Menu;
+  std::shared_ptr<Menu> menptr= ret_shared();
+ // std::make_shared<menu>;
+   // menptr->push_back(dish);
+    qDebug()<<"Pointr conteins "<<menptr->size();
+
+    qDebug()<<menptr->operator [](0);
+    qDebug()<<menptr->contains(dish);
+  qDebug()<<menptr->contains(dish2);
+}
+
+void test_Order_Place(){
+
+    Order_place* ord=NULL;
+    ord = new Order_place;
+
+    ord->show();
+//qDebug()<<ord->menuptr->size();
+}
 
 }
 

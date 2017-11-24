@@ -62,8 +62,7 @@ return ind.operator [](i);
         return dbg.space();
     }
 /////////////////sort
-///
-///
+
   void sort_by_name()
   {
     std::sort(ind.begin(),ind.end(),sort_name_qdish());
@@ -89,6 +88,10 @@ return ind.operator [](i);
     QString get_name()const{return name;}
     //////////////////
     QDish operator =(QDish);
+    bool operator == (QDish _dish)const{
+        return this->get_name() == _dish.get_name();
+    }
+
     QStringList to_string_list();
     bool add_ingridient(Product,double);
 
