@@ -4,8 +4,9 @@
 
 QKitchen::QKitchen(Q_Restorator_main_window *parentwidg)
 {
-    std::shared_ptr<Menu> tmp(new Menu);
-    dishes= tmp;
+   std::shared_ptr<Menu> tmp(new Menu);
+
+    dishes = tmp;
     avaible_product_lay=new QHBoxLayout;
     lay_button_add_del=new QVBoxLayout;
     lay_name_dish=new QHBoxLayout;

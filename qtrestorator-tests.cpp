@@ -9,6 +9,7 @@
 #include <iostream>
 #include "menu.h"
 #include <order_place.h>
+#include "order.h"
 namespace test_rest {
 void test_operator_for_QDish(){
 
@@ -101,6 +102,56 @@ void test_Order_Place(){
     ord->show();
 //qDebug()<<ord->menuptr->size();
 }
+void test_order(){
+    Product salt("Salt","",1.5);
+    Product pepper ("pepper","",2.5);
+    Product milk ("Milk","",1.5);
+    Product popcorn("Popcorn","",2.5);
+ /*.....................................................*/
+    QDish dish("dish");
+    dish.add_ingridient(salt,200);
+    dish.add_ingridient(pepper,150);
+    dish.add_ingridient(milk,500);
+    dish.add_ingridient(popcorn,200);
 
+//   //dish.set_price();
+//     dish.set_weght();
+    QDish dish2("popcorn");
+
+    dish2.add_ingridient(popcorn,2);
+
+//    //QPair<QDish,int> dish_pair_1 (dish,2);
+//    //auto dish_pair2 (std::make_pair(dish,3));
+
+//    /*.......................................................*/
+
+//    std::shared_ptr<Order> ord (new Order);
+
+//    ord->push_back(dish_pair_1);
+//   // ord.push_back(dish_pair2);
+//    ord->set_total();
+//    ord->set_time();
+Order ord;
+ord[dish]+=1;
+ord[dish2]+=1;
+ord[dish2]+=1;
+
+ord.set_time();
+ord.set_total();
+for(auto it = ord.begin();it!=ord.end();++it){
+
+    qDebug()<<it.key();
+    qDebug()<<it.value();
+   // qDebug()<<ord.get_time();
+   // qDebug()<<ord.get_total();
+     qDebug()<<ord.get_total();
+
+    qDebug()<<"----------------------";
+}
+
+
+
+
+}
 }
 

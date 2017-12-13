@@ -8,6 +8,7 @@
 #include "qtrestorator-tests.cpp"
 #include "menu.h"
 #include "order_place.h"
+#include "order.h"
 int main(int argc, char *argv[])
 {
 
@@ -18,7 +19,7 @@ int main(int argc, char *argv[])
    //test_rest::test_Order_Place();
     Q_Restorator_main_window mainwind;
     mainwind.show();
-
+//test_rest::test_order();
 
 
 

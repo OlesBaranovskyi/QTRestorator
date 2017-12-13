@@ -11,6 +11,7 @@
 #include<QList>
 #include<QInputDialog>
 #include <algorithm>
+#include <iomanip>
 struct sort_name_qdish
 {
     bool operator()(const QPair<Product,double> &x,const QPair<Product,double>& y)const
@@ -61,6 +62,19 @@ return ind.operator [](i);
 
         return dbg.space();
     }
+
+
+  friend std::ostream & operator << (std::ostream & os,const QDish _dish){
+      for(auto i=_dish.ind.begin();i!=_dish.ind.end();i++){
+      os<<std::setw(10)<<std::setfill(' ')<< i->first.get_prdct_name().toStdString()<<"  "<<i->second;
+ }
+
+
+      return os;
+  }
+
+
+
 /////////////////sort
 
   void sort_by_name()
@@ -91,6 +105,11 @@ return ind.operator [](i);
     bool operator == (QDish _dish)const{
         return this->get_name() == _dish.get_name();
     }
+
+    bool operator <(const QDish _dish)const{
+        return this->get_price()<_dish.get_price();
+    }
+
 
     QStringList to_string_list();
     bool add_ingridient(Product,double);

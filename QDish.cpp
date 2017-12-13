@@ -101,8 +101,8 @@ bool QDish::add_ingridient(Product _prd, double _amount)
 {if (_amount>0)
 
     ind.push_back(qMakePair(_prd,_amount));
-    set_price();
-    set_weght();
+   this->set_price();
+   this->set_weght();
         return true;
     return false;
 

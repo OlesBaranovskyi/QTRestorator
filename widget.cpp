@@ -76,7 +76,7 @@ void Widget::create_view_list()
     QString str;
     QTextStream txt_stream(&str);
 
-    txt_stream.setFieldWidth(25);
+    txt_stream.setFieldWidth(30);
     txt_stream.setPadChar(' ') ;
     txt_stream.setRealNumberPrecision(4);
     txt_stream.setFieldAlignment(QTextStream::AlignLeft);
